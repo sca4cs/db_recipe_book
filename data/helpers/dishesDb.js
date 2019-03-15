@@ -9,12 +9,21 @@ module.exports = {
     if (id) {
       query.where('id', Number(id)).first();
     }
-
     return query;
   },
   addDish: function(dish) {
     return db('dishes')
       .insert(dish)
       .then(ids => ({ id: ids[0] }));
+  },
+  updateDish: function(id, dish) {
+    return db('dishes')
+      .where('id', id)
+      .update(dish);
+  },
+  removeDish: function(id) {
+    return db('dishes')
+      .where('id', id)
+      .del();
   },
 };
